@@ -1,45 +1,34 @@
-r3_course_project
+Coursera's Getting and Cleaning Data Course Project
 =================
 
-Coursera's Getting and Cleaning Data Course Project
+The script loads Human Activity Recognition Using Smartphones Dataset and calculates mean values for all mean() and std() variables for each subject and each activity.
+This work is based on "Human Activity Recognition Using Smartphones Dataset" provided by [1].
 
 
-This repo explains how all of the scripts work and how they are connected.
+R script called run_analysis.R that does the following.
 
-R script called run_analysis.R that does the following. 
+Script assumes "UCI HAR Dataset" folder in the current directory.
+It can be extracted from the dataset file obtained from: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
- * Merges the training and the test sets to create one data set.
- * Extracts only the measurements on the mean and standard deviation for each measurement. 
- * Uses descriptive activity names to name the activities in the data set
- * Appropriately labels the data set with descriptive variable names. 
- * From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+activity_labels.txt and features.txt are read as delimeted files. Feature labels then split into 4 different columns according to variable name patterns ```signal-variable()param_1,param_2``` and ```angle(param_1)?,param_2)``` for angle variables.
 
-Checklist.
+```subject``` and ```activity``` references for each window sample are read with scan as the files contain one numberic column.
 
-1.1. __Task__
+Data set feature vector values are read from ```X_train.txt``` and ```X_test.txt``` fixed width files.
 
-Please upload the tidy data set created in step 5 of the instructions. Please upload your data set as a txt file created with write.table() using row.name=FALSE (do not cut and paste a dataset directly into the text box, as this may cause errors saving your submission).
+Train and test data have the same format so they are merged with simple vector concatenation and cbind function.
 
-1.2. __Check__
+Next activity identifiers in the merged dataset are replaced with actual acivity names using sapply function.
 
-Has the student submitted a tidy data set? 
+Then features dataset is filtered by variable names "mean" and "std" and the result get applied as a column filter on the merged dataset.
+
+The tidy dataset is created first by melting the feature columns into rows. And casting it back with aggregation fuction mean applied.
+
+Finally the tidy dataset is written to dist with write.table function (row.name=FALSE argument used).
 
 
-2.1. __Task__
 
-Please submit a link to a Github repo with the code for performing your analysis. The code should have a file run_analysis.R in the main directory that can be run as long as the Samsung data is in your working directory. The output should be the tidy data set you submitted for part 1. You should include a README.md in the repo describing how the script works and the code book describing the variables.
+[1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
 
-2.2. __Check__
 
- + Did the student submit a Github repo with the required scripts?
- + Was code book submitted to GitHub that modifies and updates the codebooks available to you with the data to indicate all the variables and summaries you calculated, along with units, and any other relevant information?
- + I was able to follow the README in the directory that explained what the analysis files did.
 
-3.1. __Task__
-
-Overall evaluation/feedback.
-
-3.2. __Check__
-
- + As far as you can determine, does it appear that the work submitted for this project is the work of the student who submitted it? 
- + Please use the space below to provide constructive feedback to the student who submitted the work. Point out the submission's strengths as well as areas in need of improvement. You may also use this space to explain your grading decisions.
