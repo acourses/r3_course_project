@@ -22,6 +22,8 @@ Feautre labels were processed and split by the corresponding pattern into 4 addi
 
 Detailed information about the variables used on the feature vector can be found in 'features_info.txt'.
 
+For the purpose of this course project a total of 66 features with variable "mean" and "std" were selected.
+
 ###activity_labels.txt###
 Links the class labels with their activity name
 
@@ -54,3 +56,22 @@ Each row identifies the activity performed by subject for each window sample. It
 
 ###test/subject_test.txt###
 Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
+
+
+###tidy_data_set.txt###
+The resulting dataset with the average of each variable for each activity and each subject.
+
+activity - activity identifier.
+
+subject - subject identifier
+
+The rest 66 columns represent features vector for mean" and "std" variables.
+
+Each row identifies mean values of features for the activity performed by the subject.
+
+
+
+
+
+
+
