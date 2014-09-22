@@ -7,7 +7,7 @@
 # https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
 library(stringr)
-library(sqldf)
+library(reshape2)
 
 # Load data
 
@@ -78,7 +78,10 @@ x_merged$activity <- as.factor(x_merged_activity)
 # From the data set in step 4, creates a second,
 # independent tidy data set with the average of each variable for each activity and each subject.
 
+melted <- melt(x_merged,
+               id=c("subject", "activity"),
+               measure.vars=selected_features_label)
+tidy_data_set <- dcast(melted, subject + activity ~ variable, mean)
 
-
-
+write.table(tidy_data_set, file = "tidy_data_set.txt", row.name=FALSE)
 
